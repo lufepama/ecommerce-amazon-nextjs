@@ -6,14 +6,14 @@ export const getProducts = async () => {
     try {
         const { db } = await connectToDatabase();
 
-        const posts = await db
+        const products = await db
             .collection('products')
             .find({})
             .sort({})
             .limit(20)
             .toArray();
 
-        return posts
+        return products
 
     }
     catch (err) {

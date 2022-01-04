@@ -2,6 +2,7 @@ import UserContext from '../context/UserProvider'
 import { useEffect, useContext } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { putCustomerController } from '../controllers/users/index'
+import { saveTokenLocalStorage } from '../localstorage/index'
 
 export const useUsers = () => {
 
@@ -12,21 +13,33 @@ export const useUsers = () => {
         setToken(newToken)
     }
 
+    //Save to DB in case it is new Customer
+    const putCustomer = async (userInfoFromBackEnd) => {
+        await putCustomerController(userInfoFromBackEnd)
+    }
+
+
     const updateUserInfoAndToken = async () => {
+
         const userInfoFromBackEnd = await getIdTokenClaims()
-        if (userInfoFromBackEnd) {
+        if (userInfoFromBackEnd && isAuthenticated) {
             setUserInfo({
                 name: userInfoFromBackEnd.given_name,
                 email: userInfoFromBackEnd.email,
                 profileImg: userInfoFromBackEnd.picture,
             })
             setToken(userInfoFromBackEnd.__raw)
-            await putCustomerController(userInfoFromBackEnd)
+            saveTokenLocalStorage(userInfoFromBackEnd.__raw)
+            await putCustomer(userInfoFromBackEnd)
+            return;
         }
+        setUserInfo({})
     }
 
     useEffect(() => {
+
         updateUserInfoAndToken()
+
     }, [isAuthenticated])
 
     return {

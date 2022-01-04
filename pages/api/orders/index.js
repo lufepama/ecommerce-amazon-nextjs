@@ -3,13 +3,11 @@ import { isCustomerSaved } from "../../../helper/database/customer"
 
 export default async function handler(req, res) {
 
-    if (req.method == 'POST') {
-
+    if (req.method == 'PUT') {
         const body = JSON.parse(req.body)
-        console.log('bodye', body)
         const isAlreadyCustomer = await isCustomerSaved(body.email)
-        if (!isAlreadyCustomer) {
 
+        if (!isAlreadyCustomer) {
             const response = await putCustomer(body)
             res.status(200).send({ response })
         }
@@ -18,5 +16,5 @@ export default async function handler(req, res) {
 
     }
 
-    res.status(200).json({ error: 'Ha habido un problema' })
+    return res.status(200).json({ error: 'Ha habido un problema' })
 }

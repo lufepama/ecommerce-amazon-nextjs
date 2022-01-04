@@ -22,7 +22,7 @@ export const getStaticProps = async (context) => {
 
     const productId = context.params.id
 
-    const res = await fetch('http://localhost:3000/api/products/' + productId)
+    const res = await fetch(`http://localhost:3000/api/products/${productId}`)
     const data = await res.json()
 
     const { response } = data
@@ -35,17 +35,3 @@ export const getStaticProps = async (context) => {
     }
 
 }
-
-const detailProduct = ({ product, productId }) => {
-
-    return (
-        <div>
-            <h1>Detail</h1>
-            <h1>{productId}</h1>
-
-            <h1>{product.name}</h1>
-        </div>
-    )
-}
-
-export default detailProduct

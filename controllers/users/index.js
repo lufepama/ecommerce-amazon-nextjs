@@ -8,4 +8,5 @@ export const putCustomerController = async (userInfo) => {
         },
         body: JSON.stringify(userInfo)
     })
+
 }

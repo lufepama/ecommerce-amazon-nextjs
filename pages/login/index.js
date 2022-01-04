@@ -1,17 +1,30 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import amazonLogo from '../../public/images/amazon.png'
 import { useAuth0 } from '@auth0/auth0-react'
-import { useUsers } from '../../hooks/useUsers'
+import { useEffect } from 'react'
+import { useOrder } from '../../hooks/useOrder'
 
 const login = () => {
 
-    const { loginWithRedirect } = useAuth0()
-    const { token, updateToken } = useUsers()
+    const { loginWithPopup, user, isAuthenticated } = useAuth0()
+    const { getOrCreateOrder } = useOrder()
+    const router = useRouter()
 
-
-    const onGmailSubmit = () => {
-        loginWithRedirect()
+    const onGmailSubmit = async () => {
+        await loginWithPopup()
+        router.push('http://localhost:3000')
     }
+
+    useEffect(() => {
+
+        return () => {
+            if (isAuthenticated) {
+                getOrCreateOrder(user)
+            }
+        }
+
+    }, [isAuthenticated])
 
     return (
         <div className='flex flex-col items-center h-screen'>
@@ -23,8 +36,6 @@ const login = () => {
                     objectFit='contain'
                 />
             </div>
-            <h1>{token}</h1>
-
             <div className='flex flex-col py-5 px-5 h-auto w-80 border rounded-md border-gray-300'>
                 <p className='text-3xl font-medium'>Iniciar sesión</p>
                 <p className='text-sm font-medium mt-4'>Dirección de e-mail o con Gmail</p>
@@ -33,7 +44,6 @@ const login = () => {
                 <button className='bg-yellow-300 rounded-md mt-5'>Continuar</button>
                 <button className='bg-yellow-300 rounded-md mt-5 ' onClick={onGmailSubmit}>Accede con Gmail</button>
                 <p className='mt-2'>Al identificarte aceptas nuestras Condiciones de uso y venta. Consulta nuestro Aviso de privacidad y nuestras Aviso de Cookies y Aviso sobre publicidad basada en los intereses del usuario.</p>
-                import {useAuth0} from '@auth0/auth0-react'
 
             </div>
         </div>
