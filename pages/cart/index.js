@@ -1,11 +1,11 @@
-import withAuth from '../../components/withAuth'
+// import withAuth from '../../components/withAuth'
 import Image from 'next/image'
 import mainImage from '../../public/images/publi.jpg'
 import { useOrder } from '../../hooks/useOrder'
 import ProductItemListCart from '../../components/ProductItemListCart'
 import Link from 'next/link'
 
-const cart = () => {
+const Cart = () => {
 
     const { myCart, getSubtotal } = useOrder()
 
@@ -58,4 +58,4 @@ const cart = () => {
     )
 }
 
-export default withAuth(cart)
+export default Cart

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { signupService } from '../../services/signupService'
 
-const signup = () => {
+const Signup = () => {
 
     const [data, setData] = useState({
         username: 'mauro',
@@ -71,4 +71,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup

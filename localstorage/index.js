@@ -57,3 +57,35 @@ export const getCartLocalStorage = () => {
     }
 
 }
+
+export const getPreviousOrdersLocalStorage = () => {
+
+    if (typeof window !== 'undefined') {
+
+        const query = localStorage.getItem('previousOrders')
+
+        return query ? JSON.parse(query) : []
+
+    }
+}
+
+export const setPreviousOrdersLocalStorage = (order) => {
+
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('previousOrders', JSON.stringify(order))
+    }
+
+}
+
+export const updatePreviousOrderLocalStorage = (order) => {
+
+    if (typeof window !== 'undefined') {
+        const query = localStorage.getItem('previousOrder')
+        if (query) {
+            const prevOrder = JSON.parse(query)
+            prevOrder.push(order)
+            localStorage.setItem('previousOrder', JSON.stringify(prevOrder))
+        }
+    }
+
+}

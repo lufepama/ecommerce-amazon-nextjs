@@ -3,10 +3,7 @@ import Image from 'next/image'
 import mainImage from '../public/images/index.jpg'
 import ProductsList from '../components/ProductsList'
 import { getProductsController } from '../controllers/products'
-import withAuth from '../components/withAuth'
-import { useEffect } from 'react'
-import { useCheckout } from '../hooks/useCheckout'
-import { useOrder } from '../hooks/useOrder'
+// import withAuth from '../components/withAuth'
 
 const Home = ({ products }) => {
 
@@ -45,4 +42,6 @@ export async function getStaticProps() {
   }
 }
 
-export default withAuth(Home)
+// export default withAuth(Home)
+export default Home
+

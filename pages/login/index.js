@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { useEffect } from 'react'
 import { useOrder } from '../../hooks/useOrder'
 
-const login = () => {
+const Login = () => {
 
     const { loginWithPopup, user, isAuthenticated } = useAuth0()
     const { getOrCreateOrder } = useOrder()
@@ -50,4 +50,4 @@ const login = () => {
     )
 }
 
-export default login
+export default Login

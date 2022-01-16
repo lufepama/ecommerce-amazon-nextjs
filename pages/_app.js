@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import { OrderProvider } from '../context/OrderProvider'
 import { UserProvider } from '../context/UserProvider'
 import { CheckoutProvider } from '../context/CheckoutProvider'
+import { PreviousOrderProvider } from '../context/PreviousOrderProvider'
 import { Auth0Provider } from '@auth0/auth0-react'
 
 function MyApp({ Component, pageProps }) {
@@ -15,11 +16,13 @@ function MyApp({ Component, pageProps }) {
     >
       <UserProvider>
         <CheckoutProvider>
-          <OrderProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </OrderProvider>
+          <PreviousOrderProvider>
+            <OrderProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </OrderProvider>
+          </PreviousOrderProvider>
         </CheckoutProvider>
       </UserProvider>
     </Auth0Provider>

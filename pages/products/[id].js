@@ -18,6 +18,17 @@ export const getStaticPaths = async () => {
 
 }
 
+const Index = ({ product }) => {
+
+
+    return (
+        <div>
+            <h1>{product.name}</h1>
+        </div>
+    )
+}
+
+
 export const getStaticProps = async (context) => {
 
     const productId = context.params.id
@@ -33,5 +44,7 @@ export const getStaticProps = async (context) => {
             productId
         }
     }
-
 }
+
+
+export default Index

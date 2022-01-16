@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
-import withAuth from '../../components/withAuth'
+// import withAuth from '../../components/withAuth'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import styles from '../../styles.module.css'
 import CheckoutForm from '../../components/CheckoutForm'
 import { useOrder } from '../../hooks/useOrder'
 import { useCheckout } from '../../hooks/useCheckout'
@@ -11,7 +10,7 @@ import ProductItemListCart from '../../components/ProductItemListCart'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 
-const checkout = () => {
+const Checkout = () => {
 
     const { myCart, getSubtotal } = useOrder()
     const { createPaymentProcess, isSuccess, updateSuccessMessage, clientSecret } = useCheckout()
@@ -74,4 +73,4 @@ const checkout = () => {
     )
 }
 
-export default withAuth(checkout)
+export default Checkout
